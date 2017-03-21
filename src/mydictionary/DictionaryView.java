@@ -6,14 +6,8 @@
 package mydictionary;
 
 import java.util.ArrayList;
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -31,10 +25,18 @@ public class DictionaryView extends VBox{
     private void populateContent(){
         for(WordModel world:this.words)
         {
-            Text wordText=new Text(Integer.toString(13));
-            wordText.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,40));  
-            this.getStyleClass().add("minimalLevelView");              
-            this.getChildren().add(wordText);
-        }       
+            //Text wordText=new Text(Integer.toString(13));
+            //wordText.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,40));  
+            //this.getStyleClass().add("minimalLevelView"); 
+            this.grid.getChildren().add(new WordViewModel(world));
+            this.getChildren().add(new WordViewModel(world));
+            
+        }
+       // this.getChildren().add(grid);
+        //grid.set
+         grid.setVgap(25);
+         grid.setHgap(25);
+         this.getStyleClass().add("test"); 
+        this.setSpacing(10);
     }
 }

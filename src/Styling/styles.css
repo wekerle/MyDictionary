@@ -6,6 +6,11 @@
     -fx-border-radius: 10;
     -fx-background-color: bisque;
     -fx-border-color: chocolate;
+    -fx-padding: 2 2 2 2;
+}
+
+.test
+{
     -fx-padding: 10 10 10 10;
 }
 

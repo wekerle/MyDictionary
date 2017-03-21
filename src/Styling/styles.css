@@ -1,4 +1,4 @@
-.minimalLevelView
+.word
 {
     -fx-border-style: solid inside;
     -fx-border-width: 2;
@@ -9,18 +9,7 @@
     -fx-padding: 2 2 2 2;
 }
 
-.test
+.page
 {
-    -fx-padding: 10 10 10 10;
-}
-
-.disabledMinimalLevelView
-{
-    -fx-border-style: solid inside;
-    -fx-border-width: 2;
-    -fx-background-radius:10;
-    -fx-border-radius: 10;
-    -fx-background-color: lightgray;
-    -fx-border-color: chocolate;
     -fx-padding: 10 10 10 10;
 }

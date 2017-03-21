@@ -5,8 +5,11 @@
  */
 package mydictionary;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -76,7 +79,7 @@ public class MyDictionary extends Application{
         // --- Menu File
         Menu menuFile = new Menu("Menu");
         
-        MenuItem loadMenuItem = new MenuItem("Load");
+        MenuItem openMenuItem = new MenuItem("Open");
         MenuItem exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction(actionEvent ->
                 stage.fireEvent(
@@ -86,31 +89,32 @@ public class MyDictionary extends Application{
                         )
                 ));
 
-        menuFile.getItems().addAll(loadMenuItem,
+        menuFile.getItems().addAll(openMenuItem,
         new SeparatorMenuItem(), exitMenuItem);
-        loadMenuItem.setOnAction(actionEvent -> clickLoad());                     
+        openMenuItem.setOnAction(actionEvent -> clickOpen());                     
         menuBar.getMenus().addAll(menuFile);
                   
         return menuBar;
 
     }
     
-    private void clickLoad()
+    private void clickOpen()
     {       
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Load Game");
+        fileChooser.setTitle("Open file");
 
         fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("txt", "*.txt")
         );
         File file = fileChooser.showOpenDialog(stage);
         
+        ArrayList<WordModel> words=new ArrayList<WordModel>();
         if(file!=null)
         {
-            //this.aplicationModel=fileToAplicationModel(file.getPath()); 
+            words=this.readWordsFromFile(file.getPath()); 
         } 
-        //start(stage);
-        WordModel w1=new WordModel(1,"hello1","salut1");
+
+        /*WordModel w1=new WordModel(1,"hello1","salut1");
         WordModel w2=new WordModel(2,"hello2","salut2");
         WordModel w3=new WordModel(3,"hello3","salut3");
         WordModel w4=new WordModel(4,"hello4","salut4");
@@ -121,9 +125,34 @@ public class MyDictionary extends Application{
         words.add(w4);
         words.add(w3);
         words.add(w2);
-        words.add(w1);
+        words.add(w1);*/
         
         DictionaryView dw=new DictionaryView(words);
         borderPane.setCenter(dw);
+    }
+
+    private ArrayList<WordModel> readWordsFromFile(String path) {       
+        ArrayList<WordModel> words=new ArrayList<WordModel>();
+        int id=0;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String line = br.readLine();
+
+            String word="";
+            String echivalentWord="";
+            
+
+            while (line != null) {
+                id++;           
+                word=line.split("-")[0];
+                echivalentWord=line.split("-")[1];
+                words.add(new WordModel(id, word, echivalentWord));
+                line = br.readLine();                            
+            }
+            
+        } catch(Exception e) {
+           // br.close();
+            }
+        return words;
     }
 }

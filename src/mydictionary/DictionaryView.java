@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
  * @author Ronaldo
  */
 public class DictionaryView extends VBox{
-    private GridPane grid=new GridPane();
+    private ArrayList<PageView> pages=new ArrayList<PageView>();
     private ArrayList<WordModel> words;
 
     public DictionaryView(ArrayList<WordModel> words) {
@@ -23,20 +23,24 @@ public class DictionaryView extends VBox{
     }
     
     private void populateContent(){
+        int i=0;
+        ArrayList<WordViewModel> wordsPerPage=new ArrayList<WordViewModel>();
         for(WordModel world:this.words)
         {
-            //Text wordText=new Text(Integer.toString(13));
-            //wordText.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,40));  
-            //this.getStyleClass().add("minimalLevelView"); 
-            this.grid.getChildren().add(new WordViewModel(world));
-            this.getChildren().add(new WordViewModel(world));
-            
+            i++;
+            wordsPerPage.add(new WordViewModel(world));
+            if(i==12)
+            {
+                i=0;
+                this.pages.add(new PageView(wordsPerPage));
+                wordsPerPage=new ArrayList<WordViewModel>();
+            } 
         }
-       // this.getChildren().add(grid);
-        //grid.set
-         grid.setVgap(25);
-         grid.setHgap(25);
-         this.getStyleClass().add("test"); 
-        this.setSpacing(10);
+        if(i!=0)
+        {
+            this.pages.add(new PageView(wordsPerPage));
+        }
+        
+        this.getChildren().add(pages.get(0));      
     }
 }

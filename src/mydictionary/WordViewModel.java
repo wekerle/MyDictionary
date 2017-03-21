@@ -5,9 +5,8 @@
  */
 package mydictionary;
 
-import java.util.ArrayList;
-import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -26,15 +25,22 @@ public class WordViewModel extends HBox{
     }
     
     private void populateContent(){
-        Text wordText=new Text(Integer.toString(13));
+        Text wordText=new Text(this.word.getFirstLanguageWorld());
         wordText.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,20));
-        Text echivalentWordText=new Text(Integer.toString(13));
+        Text echivalentWordText=new Text(this.word.getEchivalentWorld());
         echivalentWordText.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,20));
         this.setSpacing(25);
-       // this.setVgap(25);
-        
-       this.getStyleClass().add("minimalLevelView");              
+         
+        this.getStyleClass().add("word");              
         this.getChildren().add(wordText); 
         this.getChildren().add(echivalentWordText);
+        echivalentWordText.setVisible(false);
+        
+        wordText.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                echivalentWordText.setVisible(true);
+            }
+        });    
     }
 }

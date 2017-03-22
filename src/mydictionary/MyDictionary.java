@@ -113,19 +113,6 @@ public class MyDictionary extends Application{
         {
             words=this.readWordsFromFile(file.getPath()); 
         } 
-
-        /*WordModel w1=new WordModel(1,"hello1","salut1");
-        WordModel w2=new WordModel(2,"hello2","salut2");
-        WordModel w3=new WordModel(3,"hello3","salut3");
-        WordModel w4=new WordModel(4,"hello4","salut4");
-        WordModel w5=new WordModel(5,"hello5","salut5");
-        
-        ArrayList<WordModel> words=new ArrayList<WordModel>();
-        words.add(w5);
-        words.add(w4);
-        words.add(w3);
-        words.add(w2);
-        words.add(w1);*/
         
         DictionaryView dw=new DictionaryView(words);
         borderPane.setCenter(dw);
@@ -151,7 +138,6 @@ public class MyDictionary extends Application{
             }
             
         } catch(Exception e) {
-           // br.close();
             }
         return words;
     }

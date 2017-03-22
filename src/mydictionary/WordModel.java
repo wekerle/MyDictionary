@@ -26,6 +26,14 @@ public class WordModel {
         return echivalentWorld;
     }
 
+    public void setFirstLanguageWorld(String firstLanguageWorld) {
+        this.firstLanguageWorld = firstLanguageWorld;
+    }
+
+    public void setEchivalentWorld(String echivalentWorld) {
+        this.echivalentWorld = echivalentWorld;
+    }
+
     public WordModel(int id, String firstLanguageWorld, String echivalentWorld) {
         this.id = id;
         this.firstLanguageWorld = firstLanguageWorld;

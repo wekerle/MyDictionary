@@ -104,7 +104,7 @@ public class DictionaryView extends VBox{
     private void drawPages()
     {
         this.currentPage=1;
-        this.maxPage=0;
+        this.maxPage=1;
         int i=0;
         pages=new ArrayList<PageView>();
         long seed = System.nanoTime();

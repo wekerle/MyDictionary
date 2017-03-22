@@ -43,14 +43,14 @@ lack-hiany
 bickering-veszekedes,cearta
 swift-rapid
 track-nyom.urmari
-side-by-side=egymas mellett
+side by side-egymas mellett
 wretched-mizerabil,nenorocit,nyomorult
 hive-stup,kaptar
 scum-gunoi
 villainy-gazsag,josnicie
 abide-a suporta
 freighter-fuvar
-entanglement-incurcatura,reţea de sârmă ghimpată
+entanglement-incurcatura,retea de sarma ghimpata
 bounty hunter-fejvadasz, vanator de recompense
 smuggler-contrabandist,csempesz
 fry-praji

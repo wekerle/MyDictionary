@@ -28,7 +28,7 @@ public class DictionaryView extends VBox{
     private ArrayList<PageView> pages;
     private ArrayList<WordModel> words;
     private int currentPage=1;
-    private int maxPage=0;
+    private int maxPage=1;
     private VBox pageConainer=new VBox();
     Text pageIndicator=new Text("Page:1/4");
         
@@ -97,7 +97,7 @@ public class DictionaryView extends VBox{
     private void renderPage(int pageNr)
     {
         this.pageConainer.getChildren().clear();
-        this.pageConainer.getChildren().add(pages.get(pageNr)); 
+        this.pageConainer.getChildren().add(pages.get(pageNr-1)); 
         this.pageIndicator.setText("Page:"+this.currentPage+"/"+this.maxPage);
     }
     

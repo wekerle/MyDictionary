@@ -62,9 +62,7 @@ public class MyDictionary extends Application{
     private GridPane getContent() 
     {
         GridPane grid = new GridPane();   
-        
-        
-        
+           
         grid.setHgap(25);
         grid.setVgap(25);
         grid.setPadding(new Insets(20, 10, 10, 50));
@@ -126,8 +124,7 @@ public class MyDictionary extends Application{
             String line = br.readLine();
 
             String word="";
-            String echivalentWord="";
-            
+            String echivalentWord="";           
 
             while (line != null) {
                 id++;           

@@ -5,11 +5,14 @@
  */
 package mydictionary;
 
+import Listener.MarkWordListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,16 +27,18 @@ import javafx.scene.text.Text;
  *
  * @author Ronaldo
  */
-public class DictionaryView extends VBox{
+public class DictionaryView extends VBox implements MarkWordListener{
     private ArrayList<PageView> pages;
     private ArrayList<WordModel> words;
+    private ArrayList<WordModel> markedWords = new ArrayList<>();
     private int currentPage=1;
     private int maxPage=1;
     private VBox pageConainer=new VBox();
-    Text pageIndicator=new Text("Page:1/4");
+    Text pageIndicator=new Text("");
+    Text markedCounter=new Text("Marked words: "+markedWords.size());
         
     public DictionaryView(ArrayList<WordModel> words) {
-        this.words=words;
+        this.words = words;
         this.populateContent();
     }
     
@@ -83,10 +88,32 @@ public class DictionaryView extends VBox{
                 DictionaryView.this.drawPages();
             }
         });
+        
+        markedCounter.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+
+            @Override
+            public void handle(MouseEvent event) {   
+                if(DictionaryView.this.markedWords.size()==0){
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setTitle(null);
+                    alert.setContentText("There are 0 marked words, please mark at least 1");
+                    alert.showAndWait();
+                }else{
+                    DictionaryView.this.words = DictionaryView.this.markedWords;
+                    DictionaryView.this.markedWords = new ArrayList<>();
+                    DictionaryView.this.drawPages();
+                }               
+            }
+        });
                
         footerNode.getChildren().add(buttonRestart);
         pageIndicator.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,20));
+        markedCounter.setFont(Font.font("TimesNewRoman",FontWeight.BOLD,20));
+        markedCounter.setStyle("-fx-cursor: hand;");
         
+        footerNode.getChildren().add(markedCounter);
         footerNode.getChildren().add(pageIndicator);
         footerNode.setAlignment(Pos.CENTER);
         footerNode.setSpacing(20);
@@ -98,6 +125,7 @@ public class DictionaryView extends VBox{
     {
         this.pageConainer.getChildren().clear();
         this.pageConainer.getChildren().add(pages.get(pageNr-1)); 
+        markedCounter.setText("Marked words: "+markedWords.size());
         this.pageIndicator.setText("Page:"+this.currentPage+"/"+this.maxPage);
     }
     
@@ -114,7 +142,7 @@ public class DictionaryView extends VBox{
         for(WordModel word:this.words)
         {
             i++;
-            wordsPerPage.add(new WordViewModel(word));
+            wordsPerPage.add(new WordViewModel(word,this));
             if(i==12)
             {
                 i=0;
@@ -140,5 +168,13 @@ public class DictionaryView extends VBox{
             word.setEchivalentWorld(aux);
         }
         this.drawPages();
+    }
+
+    @Override
+    public void addMarked(WordModel word) {
+        if(!markedWords.remove(word)){
+            markedWords.add(word);
+        }
+        markedCounter.setText("Marked words: "+markedWords.size());
     }
 }

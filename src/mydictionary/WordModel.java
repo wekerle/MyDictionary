@@ -13,9 +13,18 @@ public class WordModel {
     private int id;
     private String firstLanguageWorld;
     private String echivalentWorld;
-
+    private boolean isMarked;
+    
     public int getId() {
         return id;
+    }
+    
+    public boolean getIsMarked() {
+        return isMarked;
+    }
+    
+    public void setIsMarked(boolean value) {
+        this.isMarked = value;
     }
 
     public String getFirstLanguageWorld() {
@@ -38,5 +47,6 @@ public class WordModel {
         this.id = id;
         this.firstLanguageWorld = firstLanguageWorld;
         this.echivalentWorld = echivalentWorld;
+        this.isMarked = false;
     }
 }

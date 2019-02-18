@@ -102,6 +102,10 @@ public class DictionaryView extends VBox implements MarkWordListener{
                     alert.showAndWait();
                 }else{
                     DictionaryView.this.words = DictionaryView.this.markedWords;
+                    for(WordModel word : DictionaryView.this.words){
+                        word.setIsMarked(false);
+                    }
+                    
                     DictionaryView.this.markedWords = new ArrayList<>();
                     DictionaryView.this.drawPages();
                 }               
